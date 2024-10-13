@@ -23,6 +23,50 @@ The Assignment Portal is a web application built using Django and MongoDB that a
 
 All roles can log in through the same login page. Simply enter your credentials to access the appropriate dashboard based on your role.
 
+
+## Screenshots
+
+### Homepage
+![Homepage 1](assignment_portal/screenshots/home1.png)
+![Homepage 2](assignment_portal/screenshots/home3.png)
+*These screenshots showcase the homepage of the application, featuring an intuitive layout and navigation options for users to access various functionalities.*
+
+### Login Page
+![Login Page](assignment_portal/screenshots/login.png)
+*This is the login page where users can enter their credentials (username and password) to access their respective dashboards. The design is user-friendly, ensuring ease of use for all roles.*
+
+### Register Page
+![Register Page](assignment_portal/screenshots/register.png)
+*The registration page where new users can create their accounts.*
+
+### User Dashboard
+![User Dashboard](assignment_portal/screenshots/userdashboard.png)
+*This is the user dashboard, which displays the assignments submitted by the user along with their statuses.*
+
+### Upload Assignment
+![Upload Assignment](assignment_portal/screenshots/upload_assignment.png)
+*This screenshot depicts the upload assignment page where users can submit their assignments. It provides fields for entering details related to the assignment as needed.*
+
+### Admin Dashboard
+![Admin Dashboard](assignment_portal/screenshots/admindashboard.png)
+*The admin dashboard allows admins to view and manage assignments assigned to them. Admins can accept or reject assignments and monitor the status of submissions from users.*
+
+### Superuser Dashboard
+![Superuser Dashboard 1](assignment_portal/screenshots/superuser_dashboard.png)
+![Superuser Dashboard 2](assignment_portal/screenshots/superuser_dashboard2.png)
+*These screenshots illustrate the superuser dashboard, providing an overview of all registered users and admins, along with details on assignments submitted by users. The superuser has the ability to manage and oversee the activities of other roles.*
+
+### Register Admin
+![Register Admin](assignment_portal/screenshots/register-admin.png)
+*This screenshot shows the page where the superuser can register new admin accounts. It includes fields for entering the admin's username and password, ensuring that only authorized personnel can create admin accounts.*
+
+## Technology Stack
+
+- **Python**: Version 3.8
+- **Django**: A high-level Python web framework for building web applications.
+- **Djongo**: A connector for integrating Django with MongoDB, allowing for seamless data management.
+- **MongoDB**: A NoSQL database used for storing application data.
+
 ## Setup Instructions
 
 ```markdown
