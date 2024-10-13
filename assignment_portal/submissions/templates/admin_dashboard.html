@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="{% static 'submissions/css/styles.css' %}">
+    <style>
+        /* Adding blue background and some basic styling */
+        body {
+            background-color: #b7b2d5;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Ensure the body takes at least the full viewport height */
+            margin: 0; /* Remove default margin */
+        }
+
+        .container {
+            flex: 1; /* Allow the container to grow and take available space */
+            width: 80%;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1.main-title {
+            text-align: center;
+            color: white; /* Change color to white for the main title */
+        }
+
+        h1.welcome {
+            text-align: center;
+            color: black; /* Change color to black for welcome heading */
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #5D54A4;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .status-pending {
+            color: orange;
+        }
+
+        .status-accepted {
+            color: green;
+        }
+
+        .status-rejected {
+            color: red;
+        }
+
+        .upload-btn {
+            display: block;
+            width: 200px;
+            margin: 20px auto;
+            padding: 10px;
+            text-align: center;
+            background-color: #5D54A4;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .upload-btn:hover {
+            background-color: #005fa3;
+        }
+
+        /* Button styling for Accept and Reject */
+        .action-btn {
+            padding: 10px 20px;
+            border-radius: 30px;
+            color: white;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            margin-bottom: 10px;
+            display: block; /* Make the buttons stack vertically */
+            width: 50px;
+
+        }
+
+        .accept-btn {
+            background-color: #28a745; /* Green for accept */
+        }
+
+        .reject-btn {
+            background-color: #dc3545; /* Red for reject */
+        }
+
+        .action-btn:hover {
+            opacity: 0.8;
+        }
+
+       
+
+        /* Header and Footer styling */
+        header {
+            background-color: #1b192d;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            text-align: center;
+        }
+
+        nav ul p {
+            margin-top: 10px;
+            font-size: 1.1rem;
+        }
+
+        footer {
+            background-color: #1b192d;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            width: 100%;
+            margin-top: auto; /* Push the footer to the bottom */
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 1rem;
+        }
+
+        /* Logout button styling */
+        .logout-btn {
+            position: absolute;
+            top: 20px; /* Position it at the top */
+            right: 20px; /* Position it to the left */
+            padding: 10px 15px;
+            background-color: #d9534f; /* Red background for logout */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none; /* Remove underline */
+        }
+
+        .logout-btn:hover {
+            background-color: #c9302c; /* Darker red on hover */
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <h1 class="main-title">Assignment Management Dashboard</h1>
+        <nav>
+            <ul>
+                <p>Manage assignments effectively with easy review and decision-making!</p>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main content section -->
+    <div class="container">
+        <h1 class="welcome">Welcome, Admin {{ user.username }}!</h1>
+
+        <h2>Assigned Tasks</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>User</th>
+                    <th>Task</th>
+                    <th>Submitted At</th>
+                    <th>Status</th>
+                    <th>Action</th> <!-- Column for accept/reject actions -->
+                </tr>
+            </thead>
+            <tbody>
+                {% for assignment in assignments %}
+                <tr>
+                    <td>{{ assignment.user_username }}</td>
+                    <td>{{ assignment.task }}</td>
+                    <td>{{ assignment.submitted_at }}</td>
+                    <td>
+                        <span class="status-{{ assignment.status }}">
+                            {{ assignment.status|capfirst }}
+                        </span>
+                    </td>
+                    <td>
+                        {% if assignment.status == 'pending' %}
+                            <a class="action-btn accept-btn" href="{% url 'accept_assignment' assignment.assignment_id %}">Accept</a>
+                            <a class="action-btn reject-btn" href="{% url 'reject_assignment' assignment.assignment_id %}">Reject</a>
+                        {% else %}
+                            <span>No Action</span> <!-- Disable action if not pending -->
+                        {% endif %}
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5">No assignments found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Footer Section -->
+    <footer>
+        <a class="logout-btn" href="{% url 'logout' %}">Logout</a>
+        <p>&copy; 2024 Assignment Management Portal. All rights reserved. | Contact Us: admin@assignportal.com</p>
+    </footer>
+</body>
+</html>

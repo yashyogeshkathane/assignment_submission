@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Superuser Dashboard</title>
+    <link rel="stylesheet" href="{% static 'submissions/css/styles.css' %}">
+    <style>
+        /* Adding blue background and some basic styling */
+        body {
+            background-color: #b7b2d5;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            flex: 1;
+            width: 80%;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1.main-title {
+            text-align: center;
+            color: white;
+        }
+
+        h1.welcome {
+            text-align: center;
+            color: black;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #5D54A4;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .upload-btn {
+            display: block;
+            width: 200px;
+            margin: 20px auto;
+            padding: 10px;
+            text-align: center;
+            background-color: #5D54A4;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .upload-btn:hover {
+            background-color: #005fa3;
+        }
+
+        /* Header and Footer styling */
+        header {
+            background-color: #1b192d;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            text-align: center;
+        }
+
+        nav ul p {
+            margin-top: 10px;
+            font-size: 1.1rem;
+        }
+
+        footer {
+            background-color: #1b192d;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            width: 100%;
+            margin-top: auto;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 1rem;
+        }
+
+        /* Logout button styling */
+        .logout-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 10px 15px;
+            background-color: #d9534f;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .logout-btn:hover {
+            background-color: #c9302c;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section from home.html -->
+    <header>
+        <h1 class="main-title">Superuser Dashboard</h1>
+        <nav>
+            <ul>
+                <p>Efficient management for all your users, admins, and assignments!</p>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main content section -->
+    <div class="container">
+        <h1 class="welcome">Welcome, Superuser!</h1>
+
+        <!-- Register Admin Button -->
+        <a class="upload-btn" href="{% url 'register_admin' %}">Register New Admin</a>
+
+        <!-- Users Table -->
+        <h2>Users</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Date Registered</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                <tr>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.date_joined }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="2">No users found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- Admins Table -->
+        <h2>Admins</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Date Registered</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for admin in admins %}
+                <tr>
+                    <td>{{ admin.username }}</td>
+                    <td>{{ admin.date_joined }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="2">No admins found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- Assignments Table -->
+        <h2>Assignments</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Task</th>
+                    <th>User</th>
+                    <th>Admin</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for assignment in assignments %}
+                <tr>
+                    <td>{{ assignment.task }}</td>
+                    <td>{{ assignment.user_username }}</td>
+                    <td>{{ assignment.admin_username }}</td>
+                    <td>{{ assignment.status|capfirst }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="3">No assignments found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Footer Section -->
+    <footer>
+        <a class="logout-btn" href="{% url 'logout' %}">Logout</a>
+        <p>&copy; 2024 Superuser Dashboard. All rights reserved.</p>
+    </footer>
+</body>
+</html>

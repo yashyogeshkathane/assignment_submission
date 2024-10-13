@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Admin</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <style>
+        body {
+            background-color: #c6c4cf; /* Same background color as upload_assignment */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+        }
+        h2 {
+            color: black; /* Same title color as upload_assignment */
+        }
+        button {
+            background-color: #5D54A4; /* Button color same as upload_assignment */
+            color: white; /* Text color for better contrast */
+            border: none; /* Remove default border */
+            padding: 10px 20px; /* Add padding */
+            cursor: pointer; /* Change cursor on hover */
+            margin-top: 10px; /* Add space above buttons */
+            display: inline-block; /* Ensure buttons align properly */
+        }
+        button:hover {
+            background-color: #4b487e; /* Darken button on hover */
+        }
+        .form-group {
+            margin-bottom: 15px; /* Space between form fields */
+        }
+        /* Header and Footer styling */
+        header {
+            background-color: #1b192d;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        footer {
+            background-color: #1b192d;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            margin-top: auto;
+            width: 100%;
+        }
+        footer p {
+            margin: 0;
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <h1>Register Admin</h1>
+    </header>
+
+    <div class="container">
+        <h2>Register New Admin</h2>
+        <form method="POST" action="{% url 'register_admin' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password1">Password:</label>
+                <input type="password" id="password1" name="password1" required>
+            </div>
+            <div class="form-group">
+                <label for="password2">Confirm Password:</label>
+                <input type="password" id="password2" name="password2" required>
+            </div>
+            <button type="submit">Register</button> <!-- Register button -->
+        </form>
+        
+        <a href="{% url 'superuser_dashboard' %}">
+            <button>Back to Dashboard</button> <!-- Back to Dashboard button -->
+        </a>
+
+        <br>
+        {% if form.errors %}
+            <div class="error">
+                <p>Please correct the following errors:</p>
+                <ul>
+                {% for field in form %}
+                    {% for error in field.errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2024 Register Admin. All rights reserved.</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}The Best Assignment Portal{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'submissions/css/styles.css' %}">
+    <style>
+        body {
+            font-family: 'Raleway', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(90deg, #C7C5F4, #776BCC);
+        }
+
+        header {
+            background-color: #1b192d;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            text-align: center;
+        }
+
+        nav ul p {
+            margin-top: 10px;
+            font-size: 1.1rem;
+        }
+
+        .hero {
+            background: linear-gradient(90deg, #5D54A4, #7C78B8);
+            color: white;
+            text-align: center;
+            padding: 100px 20px;
+        }
+
+        .hero h2 {
+            font-size: 48px;
+            margin: 0 0 20px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .hero button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin: 0 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s;
+        }
+
+        .hero button:hover {
+            background-color: #218838;
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .container {
+            padding: 50px;
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin: 20px auto;
+            width: 80%;
+            max-width: 2000px;
+        }
+
+        .container h2 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        .container p {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            color: #555;
+            line-height: 1.8;
+        }
+
+        .features {
+            display: flex;
+            flex-direction: rows; /* Stack boxes vertically */
+            align-items: center; /* Center align the boxes */
+            text-align: left;
+            width: 100%; /* Ensure it takes full width */
+            gap: 20px; /* Space between boxes */
+        }
+
+        .feature-box {
+            width: 30%; /* Set width to 80% for rectangular shape */
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-box h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #007bff;
+        }
+
+        .feature-box p {
+            font-size: 1rem;
+            color: #555;
+        }
+
+        footer {
+            background-color: #1b192d;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Assignment Submission Portal</h1>
+        <nav>
+            <ul>
+                <p>Affordable, reliable, and efficient – everything you need to manage your assignments effortlessly!</p>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="hero">
+        <h2>The Ultimate Assignment Management Platform</h2>
+        <p>Experience a hassle-free way of submitting and managing your assignments. Keep track of your progress, interact with your peers, and get feedback all in one place.</p>
+        <button onclick="window.location.href='{% url 'register' %}'">Register</button>
+        <button onclick="window.location.href='{% url 'login' %}'">Login</button>
+    </div>
+
+    <div class="container">
+        <h2>Why Choose Us?</h2>
+        <p>We’ve designed this platform with you in mind. Whether you're a student or an educator, our portal offers intuitive tools to help you streamline your assignment process. Save time, enhance productivity, and stay organized!</p>
+
+        <div class="features">
+            <div class="feature-box">
+                <h3>Effortless Submissions</h3>
+                <p>Submit your assignments with just a few clicks, track due dates, and ensure everything is in one place.</p>
+            </div>
+            <div class="feature-box">
+                <h3>Real-Time Feedback</h3>
+                <p>Receive instant feedback from educators and peers, helping you improve and stay on top of your work.</p>
+            </div>
+            <div class="feature-box">
+                <h3>24/7 Access</h3>
+                <p>Access your portal anytime, from anywhere. Never miss a deadline with round-the-clock availability.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Assignment Submission Portal. All rights reserved. | Contact Us: info@assignportal.com</p>
+    </footer>
+</body>
+</html>

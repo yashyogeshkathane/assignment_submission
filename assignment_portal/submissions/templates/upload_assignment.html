@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Assignment</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <style>
+        body {
+            background-color: #c6c4cf; /* Change background color */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+        }
+        h2 {
+            color: black; /* Change title color to black */
+        }
+        button {
+            background-color: #5D54A4; /* Change button color */
+            color: white; /* Change text color for better contrast */
+            border: none; /* Remove default border */
+            padding: 10px 20px; /* Add padding */
+            cursor: pointer; /* Change cursor on hover */
+            margin-top: 10px; /* Add space above buttons */
+            display: inline-block; /* Ensure buttons align properly */
+        }
+        button:hover {
+            background-color: #4b487e; /* Darken button on hover */
+        }
+        .form-group {
+            margin-bottom: 15px; /* Add space between form fields */
+        }
+        /* Header and Footer styling */
+        header {
+            background-color: #1b192d;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        footer {
+            background-color: #1b192d;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            margin-top: auto;
+            width: 100%;
+        }
+        footer p {
+            margin: 0;
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <h1>Upload Assignment</h1>
+    </header>
+
+    <div class="container">
+        <h2>Upload Assignment</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }} <!-- Render form fields -->
+            <button type="submit">Upload</button> <!-- Upload button -->
+        </form>
+        <a href="{% url 'dashboard' %}">
+            <button>Back to Dashboard</button> <!-- Back to Dashboard button -->
+        </a>
+    </div>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2024 Upload Assignment. All rights reserved.</p>
+    </footer>
+</body>
+</html>
